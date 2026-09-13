@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Semparuk Kuala</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Navbar Fixing Click/Touch Bug */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: #ffffff;
+            position: sticky;
+            top: 0;
+            z-index: 99999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+
+        .logo span {
+            color: #10b981;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li button {
+            background: none;
+            border: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #475569;
+            padding: 0.5rem 0.9rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        nav ul li button:hover, 
+        nav ul li button.active {
+            color: #10b981;
+            background-color: #ecfdf5;
+        }
+
+        /* Hero Section (Beranda) */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), 
+                        url('IMG-20260901-WA0009.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            padding: 0 1rem;
+        }
+
+        .hero-content h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .hero-content p {
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            opacity: 0.9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.8rem;
+            background-color: #10b981;
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Banner Halaman Internal */
+        .page-banner {
+            background: #0f172a;
+            color: #ffffff;
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .page-banner h1 {
+            font-size: 2rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .page-banner p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+        }
+
+        /* Section Layout */
+        section {
+            padding: 3rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 1.8rem;
+            color: #0f172a;
+        }
+
+        .section-title p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Card Layout */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.2rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.15rem;
+            color: #1e293b;
+            margin-bottom: 0.4rem;
+        }
+
+        .card-content p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Galeri Grid Fix */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid #e2e8f0;
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-info {
+            padding: 1rem;
+            background: #ffffff;
+        }
+
+        .gallery-info h4 {
+            font-size: 0.95rem;
+            color: #0f172a;
+            margin-bottom: 0.2rem;
+        }
+
+        .gallery-info span {
+            font-size: 0.8rem;
+            color: #64748b;
+            word-break: break-all;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #94a3b8;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        /* Mengatur Perpindahan Halaman SPA */
+        .page {
+            display: none;
+        }
+
+        .page.active-page {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi Utama -->
+    <nav>
+        <div class="logo">🌿 SEMPARUK <span>KUALA</span></div>
+        <ul>
+            <li><button class="nav-btn active" onclick="switchPage('beranda', this)">Beranda</button></li>
+            <li><button class="nav-btn" onclick="switchPage('tentang', this)">Tentang</button></li>
+            <li><button class="nav-btn" onclick="switchPage('wisata', this)">Wisata</button></li>
+            <li><button class="nav-btn" onclick="switchPage('galeri', this)">Galeri</button></li>
+            <li><button class="nav-btn" onclick="switchPage('kontak', this)">Kontak</button></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 1. HALAMAN BERANDA -->
+        <div id="beranda" class="page active-page">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1>Desa Semparuk Kuala</h1>
+                    <p>Menikmati keindahan ikonik, suasana asri, dan kehangatan masyarakat desa.</p>
+                    <button class="btn" onclick="switchPage('wisata', document.querySelectorAll('.nav-btn')[2])">Jelajahi Wisata</button>
+                </div>
+            </section>
+
+            <section>
+                <div class="section-title">
+                    <h2>Pesona Utama</h2>
+                    <p>Gambaran umum daya tarik Desa Semparuk Kuala.</p>
+                </div>
+
+                <div class="cards">
+                    <div class="card">
+                        <img src="IMG-20260901-WA0009.jpg" alt="Masjid Semparuk Kuala">
+                        <div class="card-content">
+                            <h3>🕌 Masjid Semparuk Kuala</h3>
+                            <p>Kemegahan tempat ibadah desa yang menjadi kebanggaan warga dengan suasana senja yang indah.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="img_1789231210489.jpg" alt="Kegiatan Kebersamaan Warga">
+                        <div class="card-content">
+                            <h3>👥 Kebersamaan Warga</h3>
+                            <p>Momen hangat saat warga beraktivitas bersama menjaga nilai budaya gotong royong.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 2. HALAMAN TENTANG -->
+        <div id="tentang" class="page">
+            <div class="page-banner">
+                <h1>Tentang Desa</h1>
+                <p>Mengenal lebih dekat masyarakat dan kebudayaan Desa Semparuk Kuala.</p>
+            </div>
+
+            <section>
+                <div class="cards">
+                    <div class="card">
+                        <img src="img_1789231210489.jpg" alt="Aktivitas Warga">
+                        <div class="card-content">
+                            <h3>Kearifan Lokal</h3>
+                            <p>Masyarakat desa senantiasa menjunjung tinggi keramahan, keakraban, serta tradisi kebersamaan.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="IMG-20260901-WA0009.jpg" alt="Pusat Keagamaan">
+                        <div class="card-content">
+                            <h3>Pusat Keagamaan</h3>
+                            <p>Masjid menjadi pusat berbagai kegiatan keagamaan dan sosial bagi seluruh masyarakat desa.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 3. HALAMAN WISATA -->
+        <div id="wisata" class="page">
+            <div class="page-banner">
+                <h1>Destinasi Wisata</h1>
+                <p>Spot-spot menarik yang wajib dikunjungi di Desa Semparuk Kuala.</p>
+            </div>
+
+            <section>
+                <div class="cards">
+                    <div class="card">
+                        <img src="IMG-20260901-WA0009.jpg" alt="Wisata Religi Masjid">
+                        <div class="card-content">
+                            <h3>🕌 Wisata Religi Masjid Desa</h3>
+                            <p>Spot wisata keagamaan dan arsitektur masjid megah dengan latar pemandangan langit senja.</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="IMG-20260912-WA0051.jpg" alt="Wisata Sunrise">
+                        <div class="card-content">
+                            <h3>🌅 Wisata Sunrise & Panorama Alam</h3>
+                            <p>Nikmati momen indahnya matahari terbit di atas lanskap alam pedesaan yang tenang.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 4. HALAMAN GALERI -->
+        <div id="galeri" class="page">
+            <div class="page-banner">
+                <h1>Galeri Berkas Foto</h1>
+                <p>Arsip dokumentasi foto Desa Semparuk Kuala beserta nama berkas aslinya.</p>
+            </div>
+
+            <section>
+                <div class="gallery-grid">
+                    <div class="gallery-card">
+                        <img src="IMG-20260901-WA0009.jpg" alt="Masjid Semparuk Kuala">
+                        <div class="gallery-info">
+                            <h4>🕌 Masjid Desa Semparuk Kuala</h4>
+                            <span>IMG-20260901-WA0009.jpg</span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <img src="IMG-20260912-WA0051.jpg" alt="Matahari Terbit">
+                        <div class="gallery-info">
+                            <h4>🌅 Pemandangan Matahari Terbit</h4>
+                            <span>IMG-20260912-WA0051.jpg</span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <img src="img_1789181218306.jpg" alt="Suasana Lingkungan Desa">
+                        <div class="gallery-info">
+                            <h4>🌾 Suasana Lingkungan Desa</h4>
+                            <span>img_1789181218306.jpg</span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <img src="img_1789231210489.jpg" alt="Aktivitas Warga">
+                        <div class="gallery-info">
+                            <h4>👥 Aktivitas Kebersamaan Warga</h4>
+                            <span>img_1789231210489.jpg</span>
+                        </div>
+                    </div>
+
+                    <div class="gallery-card">
+                        <img src="Screenshot_20260912-084459.jpg" alt="Screenshot Repositori">
+                        <div class="gallery-info">
+                            <h4>📱 Dokumentasi Repositori</h4>
+                            <span>Screenshot_20260912-084459.jpg</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- 5. HALAMAN KONTAK -->
+        <div id="kontak" class="page">
+            <div class="page-banner">
+                <h1>Kontak Desa</h1>
+                <p>Layanan informasi dan alamat Kantor Desa Semparuk Kuala.</p>
+            </div>
+
+            <section>
+                <div class="card" style="max-width: 500px; margin: 0 auto;">
+                    <div class="card-content">
+                        <h3 style="margin-bottom: 1rem; color: #10b981;">Office & Informasi</h3>
+                        <p style="margin-bottom: 0.5rem;">📍 <strong>Alamat:</strong> Jl. Raya Desa Semparuk Kuala</p>
+                        <p style="margin-bottom: 0.5rem;">✉️ <strong>Email:</strong> info@semparukkuala.desa.id</p>
+                        <p>📞 <strong>Telepon:</strong> (0561) 123-4567</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Desa Semparuk Kuala | Website Resmi</p>
+    </footer>
+
+    <!-- Script Switch Page SPA -->
+    <script>
+        function switchPage(pageId, btnElement) {
+            // Sembunyikan semua halaman
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            // Hapus status aktif dari semua tombol menu
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            // Tampilkan halaman yang dipilih
+            document.getElementById(pageId).classList.add('active-page');
+
+            // Aktifkan tombol yang diklik
+            if (btnElement) {
+                btnElement.classList.add('active');
+            }
+
+            // Scroll otomatis ke atas
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
