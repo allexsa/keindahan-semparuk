@@ -1,0 +1,234 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #334155;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar Fix Z-Index & Touch Bug */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background: #ffffff;
+    position: relative;
+    z-index: 9999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.logo span {
+    color: #10b981;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    font-weight: 600;
+    color: #475569;
+    padding: 0.5rem 0.8rem;
+    display: inline-block;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+nav ul li a:hover, nav ul li a.active {
+    color: #10b981;
+    background-color: #ecfdf5;
+}
+
+/* Hero Section */
+.hero {
+    height: 55vh;
+    background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.6)), 
+                url('IMG-20260901-WA0009.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 1rem;
+}
+
+.hero-content h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+}
+
+.hero-content p {
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem auto;
+    opacity: 0.9;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.7rem 1.8rem;
+    background-color: #10b981;
+    color: #ffffff;
+    font-weight: 600;
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+/* Header Banner */
+.page-banner {
+    background: #0f172a;
+    color: #ffffff;
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.page-banner h1 {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+}
+
+.page-banner p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
+/* Section Layout */
+section {
+    padding: 3rem 5%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.section-title h2 {
+    font-size: 1.8rem;
+    color: #0f172a;
+}
+
+.section-title p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Cards System */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+}
+
+.card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 1.2rem;
+}
+
+.card-content h3 {
+    font-size: 1.15rem;
+    color: #1e293b;
+    margin-bottom: 0.4rem;
+}
+
+.card-content p {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* Galeri Grid Fix Touch */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallery-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    display: block;
+}
+
+.gallery-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-info {
+    padding: 1rem;
+    background: #ffffff;
+}
+
+.gallery-info h4 {
+    font-size: 0.95rem;
+    color: #0f172a;
+    margin-bottom: 0.2rem;
+}
+
+.gallery-info span {
+    font-size: 0.8rem;
+    color: #64748b;
+    word-break: break-all;
+}
+
+/* Footer */
+footer {
+    background-color: #0f172a;
+    color: #94a3b8;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+    margin-top: auto;
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
