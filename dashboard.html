@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard Admin | Semparuk Kuala</title>
+
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+
+            <div class="admin-logo">
+                🌿
+                <span>SEMPARUK<br>KUALA</span>
+            </div>
+
+            <div class="admin-profile">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <div>
+                    <h3>Administrator</h3>
+                    <p>Admin Desa</p>
+                </div>
+
+            </div>
+
+            <nav>
+
+                <a href="#beranda" class="active">
+                    🏠 Beranda
+                </a>
+
+                <a href="#tentang">
+                    📖 Tentang Desa
+                </a>
+
+                <a href="#wisata">
+                    🌄 Wisata
+                </a>
+
+                <a href="#galeri">
+                    🖼️ Galeri
+                </a>
+
+                <a href="#kontak">
+                    📞 Kontak
+                </a>
+
+            </nav>
+
+            <button id="logoutBtn" class="logout-btn">
+                🚪 Logout
+            </button>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+
+            <!-- HEADER -->
+            <header class="dashboard-header">
+
+                <div>
+                    <h1>Dashboard Admin</h1>
+
+                    <p>
+                        Kelola informasi website Desa Semparuk Kuala
+                    </p>
+                </div>
+
+                <a href="index.html" class="view-site">
+                    🌐 Lihat Website
+                </a>
+
+            </header>
+
+
+            <!-- BERANDA -->
+            <section id="beranda" class="content-section">
+
+                <h2>Selamat Datang 👋</h2>
+
+                <p>
+                    Selamat datang di halaman administrasi
+                    Website Desa Semparuk Kuala.
+                </p>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <div class="card-icon">📖</div>
+
+                        <h3>Tentang</h3>
+
+                        <p>
+                            Informasi mengenai Desa Semparuk Kuala.
+                        </p>
+
+                        <button
+                            onclick="showSection('tentang')"
+                        >
+                            Kelola
+                        </button>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-icon">🌄</div>
+
+                        <h3>Wisata</h3>
+
+                        <p>
+                            Informasi wisata dan panorama desa.
+                        </p>
+
+                        <button
+                            onclick="showSection('wisata')"
+                        >
+                            Kelola
+                        </button>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-icon">🖼️</div>
+
+                        <h3>Galeri</h3>
+
+                        <p>
+                            Dokumentasi foto Desa Semparuk Kuala.
+                        </p>
+
+                        <button
+                            onclick="showSection('galeri')"
+                        >
+                            Kelola
+                        </button>
+                    </div>
+
+
+                    <div class="card">
+                        <div class="card-icon">📞</div>
+
+                        <h3>Kontak</h3>
+
+                        <p>
+                            Informasi kontak dan alamat desa.
+                        </p>
+
+                        <button
+                            onclick="showSection('kontak')"
+                        >
+                            Kelola
+                        </button>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- TENTANG -->
+            <section id="tentang" class="content-section">
+
+                <h2>📖 Tentang Desa</h2>
+
+                <div class="form-box">
+
+                    <label>Judul</label>
+
+                    <input
+                        type="text"
+                        id="judulTentang"
+                        value="Desa Semparuk Kuala"
+                    >
+
+                    <label>Deskripsi</label>
+
+                    <textarea
+                        id="deskripsiTentang"
+                        rows="6"
+                    >Menikmati keindahan ikonik, suasana asri, dan kehangatan masyarakat desa.</textarea>
+
+                    <button onclick="simpanTentang()">
+                        💾 Simpan Perubahan
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- WISATA -->
+            <section id="wisata" class="content-section">
+
+                <h2>🌄 Data Wisata</h2>
+
+                <div class="form-box">
+
+                    <label>Nama Wisata</label>
+
+                    <input
+                        type="text"
+                        id="namaWisata"
+                        placeholder="Contoh: Wisata Sunrise"
+                    >
+
+                    <label>Deskripsi Wisata</label>
+
+                    <textarea
+                        id="deskripsiWisata"
+                        rows="5"
+                        placeholder="Masukkan deskripsi wisata"
+                    ></textarea>
+
+                    <button onclick="simpanWisata()">
+                        ➕ Tambah Wisata
+                    </button>
+
+                </div>
+
+                <div id="daftarWisata"></div>
+
+            </section>
+
+
+            <!-- GALERI -->
+            <section id="galeri" class="content-section">
+
+                <h2>🖼️ Galeri Desa</h2>
+
+                <div class="form-box">
+
+                    <label>Nama Foto</label>
+
+                    <input
+                        type="text"
+                        id="namaFoto"
+                        placeholder="Contoh: Masjid Semparuk Kuala"
+                    >
+
+                    <label>URL Foto</label>
+
+                    <input
+                        type="text"
+                        id="urlFoto"
+                        placeholder="https://..."
+                    >
+
+                    <button onclick="simpanFoto()">
+                        ➕ Tambah Foto
+                    </button>
+
+                </div>
+
+                <div
+                    id="daftarGaleri"
+                    class="gallery-admin"
+                ></div>
+
+            </section>
+
+
+            <!-- KONTAK -->
+            <section id="kontak" class="content-section">
+
+                <h2>📞 Informasi Kontak</h2>
+
+                <div class="form-box">
+
+                    <label>Alamat</label>
+
+                    <input
+                        type="text"
+                        id="alamat"
+                        value="Jl. Raya Desa Semparuk Kuala"
+                    >
+
+                    <label>Email</label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        value="info@semparukkuala.desa.id"
+                    >
+
+                    <label>Telepon</label>
+
+                    <input
+                        type="text"
+                        id="telepon"
+                        value="(0561) 123-4567"
+                    >
+
+                    <button onclick="simpanKontak()">
+                        💾 Simpan Kontak
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="admin.js"></script>
+
+</body>
+</html>
