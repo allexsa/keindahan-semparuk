@@ -1,11 +1,13 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbx40XqSi80kFpZUjretfYjiltEs1yTxRq9yIDixoUSMbWJVJo3UGafRdhIj7dRaPTBZAQ/exec";
-   LOGIN ADMIN
+/* =========================
+   URL DATABASE GOOGLE SHEETS
 ========================= */
 
-// Username dan password admin
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "semparuk123";
+const API_URL = "https://script.google.com/macros/s/AKfycbx40XqSi80kFpZUjretfYjiltEs1yTxRq9yIDixoUSMbWJVJo3UGafRdhIj7dRaPTBZAQ/exec";
 
+
+/* =========================
+   LOGIN ADMIN
+========================= */
 
 const loginForm = document.getElementById("loginForm");
 
@@ -24,37 +26,64 @@ if (loginForm) {
         const message =
             document.getElementById("loginMessage");
 
+        message.style.color = "black";
+        message.innerHTML = "Memeriksa login...";
 
-        if (
-            username === ADMIN_USERNAME &&
-            password === ADMIN_PASSWORD
-        ) {
 
-            localStorage.setItem(
-                "adminLogin",
-                "true"
-            );
+        const callbackName =
+            "loginCallback_" + Date.now();
 
-            message.style.color = "green";
+        window[callbackName] = function(data) {
 
-            message.innerHTML =
-                "Login berhasil! Mengarahkan...";
+            if (data.success) {
 
-            setTimeout(function() {
+                localStorage.setItem(
+                    "adminLogin",
+                    "true"
+                );
 
-                window.location.href =
-                    "dashboard.html";
+                message.style.color = "green";
 
-            }, 700);
+                message.innerHTML =
+                    "Login berhasil! Mengarahkan...";
 
-        } else {
+                setTimeout(function() {
 
-            message.style.color = "red";
+                    window.location.href =
+                        "dashboard.html";
 
-            message.innerHTML =
-                "Username atau password salah!";
+                }, 700);
 
-        }
+            } else {
+
+                message.style.color = "red";
+
+                message.innerHTML =
+                    data.message ||
+                    "Username atau password salah!";
+
+            }
+
+            delete window[callbackName];
+            script.remove();
+
+        };
+
+
+        const script =
+            document.createElement("script");
+
+        script.src =
+            API_URL +
+            "?action=login" +
+            "&username=" +
+            encodeURIComponent(username) +
+            "&password=" +
+            encodeURIComponent(password) +
+            "&callback=" +
+            callbackName;
+
+        document.body.appendChild(script);
 
     });
 
@@ -72,511 +101,4 @@ if (
     const sudahLogin =
         localStorage.getItem("adminLogin");
 
-    if (sudahLogin !== "true") {
-
-        window.location.href =
-            "admin.html";
-
-    }
-
-}
-
-
-/* =========================
-   LOGOUT
-========================= */
-
-const logoutBtn =
-    document.getElementById("logoutBtn");
-
-if (logoutBtn) {
-
-    logoutBtn.addEventListener(
-        "click",
-        function() {
-
-            localStorage.removeItem(
-                "adminLogin"
-            );
-
-            window.location.href =
-                "admin.html";
-
-        }
-    );
-
-}
-
-
-/* =========================
-   NAVIGASI SECTION
-========================= */
-
-function showSection(id) {
-
-    const section =
-        document.getElementById(id);
-
-    if (section) {
-
-        section.scrollIntoView({
-            behavior: "smooth"
-        });
-
-    }
-
-}
-
-
-/* =========================
-   TENTANG
-========================= */
-
-function simpanTentang() {
-
-    const judul =
-        document.getElementById(
-            "judulTentang"
-        ).value;
-
-    const deskripsi =
-        document.getElementById(
-            "deskripsiTentang"
-        ).value;
-
-
-    localStorage.setItem(
-        "judulTentang",
-        judul
-    );
-
-    localStorage.setItem(
-        "deskripsiTentang",
-        deskripsi
-    );
-
-
-    alert(
-        "Data Tentang Desa berhasil disimpan!"
-    );
-
-}
-
-
-/* =========================
-   WISATA
-========================= */
-
-function simpanWisata() {
-
-    const nama =
-        document.getElementById(
-            "namaWisata"
-        ).value.trim();
-
-    const deskripsi =
-        document.getElementById(
-            "deskripsiWisata"
-        ).value.trim();
-
-
-    if (!nama || !deskripsi) {
-
-        alert(
-            "Nama dan deskripsi wisata harus diisi!"
-        );
-
-        return;
-
-    }
-
-
-    const wisata =
-        JSON.parse(
-            localStorage.getItem(
-                "dataWisata"
-            )
-        ) || [];
-
-
-    wisata.push({
-
-        nama: nama,
-
-        deskripsi: deskripsi
-
-    });
-
-
-    localStorage.setItem(
-        "dataWisata",
-        JSON.stringify(wisata)
-    );
-
-
-    document.getElementById(
-        "namaWisata"
-    ).value = "";
-
-    document.getElementById(
-        "deskripsiWisata"
-    ).value = "";
-
-
-    tampilkanWisata();
-
-    alert(
-        "Wisata berhasil ditambahkan!"
-    );
-
-}
-
-
-function tampilkanWisata() {
-
-    const container =
-        document.getElementById(
-            "daftarWisata"
-        );
-
-    if (!container) return;
-
-
-    const wisata =
-        JSON.parse(
-            localStorage.getItem(
-                "dataWisata"
-            )
-        ) || [];
-
-
-    container.innerHTML = "";
-
-
-    wisata.forEach(function(item, index) {
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "wisata-item";
-
-
-        div.innerHTML = `
-
-            <h3>🌄 ${item.nama}</h3>
-
-            <p>${item.deskripsi}</p>
-
-            <button
-                onclick="hapusWisata(${index})"
-                style="
-                    margin-top:10px;
-                    padding:8px 12px;
-                    border:0;
-                    border-radius:6px;
-                    background:#c0392b;
-                    color:white;
-                    cursor:pointer;
-                "
-            >
-                Hapus
-            </button>
-
-        `;
-
-
-        container.appendChild(div);
-
-    });
-
-}
-
-
-function hapusWisata(index) {
-
-    const wisata =
-        JSON.parse(
-            localStorage.getItem(
-                "dataWisata"
-            )
-        ) || [];
-
-
-    wisata.splice(index, 1);
-
-
-    localStorage.setItem(
-        "dataWisata",
-        JSON.stringify(wisata)
-    );
-
-
-    tampilkanWisata();
-
-}
-
-
-/* =========================
-   GALERI
-========================= */
-
-function simpanFoto() {
-
-    const nama =
-        document.getElementById(
-            "namaFoto"
-        ).value.trim();
-
-    const url =
-        document.getElementById(
-            "urlFoto"
-        ).value.trim();
-
-
-    if (!nama || !url) {
-
-        alert(
-            "Nama foto dan URL harus diisi!"
-        );
-
-        return;
-
-    }
-
-
-    const galeri =
-        JSON.parse(
-            localStorage.getItem(
-                "dataGaleri"
-            )
-        ) || [];
-
-
-    galeri.push({
-
-        nama: nama,
-
-        url: url
-
-    });
-
-
-    localStorage.setItem(
-        "dataGaleri",
-        JSON.stringify(galeri)
-    );
-
-
-    document.getElementById(
-        "namaFoto"
-    ).value = "";
-
-    document.getElementById(
-        "urlFoto"
-    ).value = "";
-
-
-    tampilkanGaleri();
-
-
-    alert(
-        "Foto berhasil ditambahkan!"
-    );
-
-}
-
-
-function tampilkanGaleri() {
-
-    const container =
-        document.getElementById(
-            "daftarGaleri"
-        );
-
-    if (!container) return;
-
-
-    const galeri =
-        JSON.parse(
-            localStorage.getItem(
-                "dataGaleri"
-            )
-        ) || [];
-
-
-    container.innerHTML = "";
-
-
-    galeri.forEach(function(item, index) {
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "gallery-item";
-
-
-        div.innerHTML = `
-
-            <img
-                src="${item.url}"
-                alt="${item.nama}"
-            >
-
-            <div>
-
-                ${item.nama}
-
-                <br>
-
-                <button
-                    onclick="hapusFoto(${index})"
-                    style="
-                        margin-top:8px;
-                        padding:7px 10px;
-                        border:0;
-                        border-radius:6px;
-                        background:#c0392b;
-                        color:white;
-                        cursor:pointer;
-                    "
-                >
-                    Hapus
-                </button>
-
-            </div>
-
-        `;
-
-
-        container.appendChild(div);
-
-    });
-
-}
-
-
-function hapusFoto(index) {
-
-    const galeri =
-        JSON.parse(
-            localStorage.getItem(
-                "dataGaleri"
-            )
-        ) || [];
-
-
-    galeri.splice(index, 1);
-
-
-    localStorage.setItem(
-        "dataGaleri",
-        JSON.stringify(galeri)
-    );
-
-
-    tampilkanGaleri();
-
-}
-
-
-/* =========================
-   KONTAK
-========================= */
-
-function simpanKontak() {
-
-    const alamat =
-        document.getElementById(
-            "alamat"
-        ).value;
-
-    const email =
-        document.getElementById(
-            "email"
-        ).value;
-
-    const telepon =
-        document.getElementById(
-            "telepon"
-        ).value;
-
-
-    localStorage.setItem(
-        "alamat",
-        alamat
-    );
-
-    localStorage.setItem(
-        "email",
-        email
-    );
-
-    localStorage.setItem(
-        "telepon",
-        telepon
-    );
-
-
-    alert(
-        "Informasi kontak berhasil disimpan!"
-    );
-
-}
-
-
-/* =========================
-   LOAD DATA
-========================= */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        tampilkanWisata();
-
-        tampilkanGaleri();
-
-
-        const judul =
-            localStorage.getItem(
-                "judulTentang"
-            );
-
-        const deskripsi =
-            localStorage.getItem(
-                "deskripsiTentang"
-            );
-
-
-        if (judul) {
-
-            const input =
-                document.getElementById(
-                    "judulTentang"
-                );
-
-            if (input) {
-                input.value = judul;
-            }
-
-        }
-
-
-        if (deskripsi) {
-
-            const textarea =
-                document.getElementById(
-                    "deskripsiTentang"
-                );
-
-            if (textarea) {
-                textarea.value =
-                    deskripsi;
-            }
-
-        }
-
-    }
-);
+    if (sudahLogin !==
